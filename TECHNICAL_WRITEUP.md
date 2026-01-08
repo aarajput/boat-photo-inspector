@@ -1,7 +1,8 @@
 # Technical Writeup: Boat Photo Inspector
 
 ## Candidate Information
-- **Name:** Ali Raza
+
+- **Name:** Ali Abbas
 - **Date:** January 8, 2026
 - **Total Time Spent:** _[To be filled after completion]_
 - **AI Tools Used:** Cursor AI with Claude Sonnet, GitHub Copilot
@@ -15,6 +16,7 @@
 **Answer:** _[To be completed after implementation]_
 
 Photos are stored using Capacitor's Filesystem plugin in the `Directory.Documents` directory. Each photo is saved with a unique ID-based filename. Metadata (annotations, timestamps, filenames) is stored separately using the Preferences plugin as a JSON array. This dual-storage approach allows:
+
 - Fast metadata retrieval for gallery display
 - Reliable photo file access using stored file paths
 - Easy synchronization between photos and their metadata
@@ -30,6 +32,7 @@ The app uses a try-catch block around permission requests and displays user-frie
 **Answer:** _[To be completed after implementation]_
 
 To prevent data corruption:
+
 1. Photos are saved to filesystem first
 2. Metadata is updated only after successful file save
 3. Each operation is wrapped in try-catch blocks
@@ -38,9 +41,10 @@ To prevent data corruption:
 
 ### Q4: Why did you choose Directory.Documents vs Directory.Data vs Directory.Cache?
 
-**Answer:** 
+**Answer:**
 
 **Directory.Documents** was chosen because:
+
 - **Persistent:** Files survive app updates and aren't purged by iOS
 - **Backed up:** Included in iCloud/iTunes backups (important for boat documentation)
 - **User data:** iOS treats Documents as user-generated content
@@ -58,6 +62,7 @@ For boat inspection photos, persistence and backup are critical requirements.
 **Answer:**
 
 Required entries:
+
 1. **NSCameraUsageDescription:** Required by iOS to request camera access. Without this, the app crashes when attempting to access the camera.
 2. **NSPhotoLibraryUsageDescription:** Required for photo library access. iOS displays this message when requesting permission.
 
@@ -68,6 +73,7 @@ These are mandatory privacy descriptions introduced in iOS 10+ to ensure users u
 **Answer:**
 
 Capacitor uses a JavaScript-to-native bridge:
+
 1. JavaScript calls are serialized and sent to native code via WKWebView's message handler
 2. Native iOS plugins (written in Swift/Obj-C) receive these messages
 3. Plugins execute native code (e.g., open camera, save files)
@@ -81,6 +87,7 @@ Plugins are registered at app startup and exposed to the web context as JavaScri
 **Answer:**
 
 1. **Create plugin structure:**
+
    ```bash
    npm init @capacitor/plugin
    ```
@@ -88,6 +95,7 @@ Plugins are registered at app startup and exposed to the web context as JavaScri
 2. **Define TypeScript interface** for the plugin API
 
 3. **Implement iOS native code:**
+
    - Create Swift class conforming to `CAPPlugin`
    - Use `@objc` decorators for exposed methods
    - Handle native iOS APIs (Camera, FileManager, etc.)
@@ -95,6 +103,7 @@ Plugins are registered at app startup and exposed to the web context as JavaScri
 4. **Implement Android equivalent** (Java/Kotlin)
 
 5. **Build and publish:**
+
    ```bash
    npm run build
    npm publish
@@ -115,6 +124,7 @@ Plugins are registered at app startup and exposed to the web context as JavaScri
 **Answer:**
 
 1. **Cursor AI (Claude Sonnet 4.5):**
+
    - Primary development assistant
    - Project scaffolding and setup
    - React component structure and TypeScript interfaces
@@ -124,6 +134,7 @@ Plugins are registered at app startup and exposed to the web context as JavaScri
    - iOS-specific configuration (Info.plist)
 
 2. **GitHub Copilot:** _(if used)_
+
    - Code completion for repetitive patterns
    - TypeScript type definitions
    - Utility function implementations
@@ -139,6 +150,7 @@ Plugins are registered at app startup and exposed to the web context as JavaScri
 **Answer:** _[To be completed as issues arise during implementation]_
 
 Examples will include:
+
 - **Issue 1:** _[e.g., "AI initially used localStorage instead of Capacitor Filesystem - had to rewrite to use proper native storage"]_
 - **Issue 2:** _[e.g., "Permission handling lacked user-friendly error messages - added custom error states"]_
 - **Issue 3:** _[e.g., "Image display paths needed Capacitor.convertFileSrc() which AI initially omitted"]_
@@ -149,8 +161,9 @@ Examples will include:
 **Answer:** _[To be completed after assessment]_
 
 With more time, I would:
+
 1. **Testing:** Add unit tests with Vitest, E2E tests with Detox
-2. **UI Polish:** 
+2. **UI Polish:**
    - Add animations and transitions
    - Implement dark mode
    - Better loading states and skeletons
@@ -183,6 +196,7 @@ _[To be filled as you identify issues during development]_
 ## Section 5: Setup Instructions
 
 ### Prerequisites
+
 - Node.js v18+
 - Xcode 14+
 - CocoaPods
@@ -191,31 +205,37 @@ _[To be filled as you identify issues during development]_
 ### Installation Steps
 
 1. **Clone/Extract the project**
+
    ```bash
    cd boat-photo-inspector
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Build the React app**
+
    ```bash
    npm run build
    ```
 
 4. **Sync with iOS**
+
    ```bash
    npx cap sync ios
    ```
 
 5. **Open in Xcode**
+
    ```bash
    npx cap open ios
    ```
 
 6. **Run the app**
+
    - Select a simulator (iPhone 15 Pro recommended)
    - Click the Play button (▶️) or press Cmd+R
    - Wait for build and launch
@@ -229,6 +249,7 @@ _[To be filled as you identify issues during development]_
    - Delete a photo
 
 ### Verification
+
 - App launches without crashes ✓
 - Camera opens (or shows permission denied message)
 - Photos persist after app restart ✓
@@ -240,6 +261,7 @@ _[To be filled as you identify issues during development]_
 ## Additional Notes
 
 ### Time Breakdown (Estimated)
+
 - Setup & Configuration: ~30 minutes
 - Core Features Implementation: ~2 hours
 - Gallery & UI Polish: ~1 hour
@@ -247,13 +269,14 @@ _[To be filled as you identify issues during development]_
 - **Total:** ~4 hours
 
 ### Challenges Faced
+
 _[To be filled during development]_
 
 ### What Went Well
+
 _[To be filled after completion]_
 
 ---
 
 **Submission Date:** _[To be filled]_
 **Submission Time:** _[To be filled]_
-
