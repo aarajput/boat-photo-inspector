@@ -73,7 +73,11 @@ export const PhotoGallery = ({
         {/* Floating Plus Button */}
         <button
           onClick={onAddPhoto}
-          className="fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-200 flex items-center justify-center hover:scale-110 active:scale-95"
+          className="fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-200 flex items-center justify-center hover:scale-110 active:scale-95 z-50"
+          style={{ 
+            bottom: 'max(2rem, calc(2rem + env(safe-area-inset-bottom)))',
+            right: 'max(2rem, calc(2rem + env(safe-area-inset-right)))'
+          }}
         >
           <svg
             className="w-8 h-8"
@@ -96,7 +100,7 @@ export const PhotoGallery = ({
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       {/* Header */}
-      <div className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-10 border-b border-gray-200">
+      <div className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-10 border-b border-gray-200 pt-safe">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div>

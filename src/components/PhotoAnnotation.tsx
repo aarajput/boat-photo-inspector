@@ -36,7 +36,7 @@ export const PhotoAnnotation = ({
   const isOverLimit = remainingChars < 0;
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 z-50 overflow-auto">
+    <div className="fixed inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 z-50 overflow-auto pt-safe">
       <div className="min-h-full flex flex-col">
         {/* Header */}
         <div className="bg-white/80 backdrop-blur-sm shadow-md border-b border-gray-200">

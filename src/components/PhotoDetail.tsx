@@ -55,7 +55,7 @@ export const PhotoDetail = ({ photo, onBack, onDelete }: PhotoDetailProps) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 z-50 overflow-auto">
+    <div className="fixed inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 z-50 overflow-auto pt-safe">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10 shadow-sm">
         <div className="flex items-center justify-between px-4 py-3">
