@@ -131,7 +131,26 @@ export const PhotoGallery = ({
       {/* Floating Plus Button */}
       <button
         onClick={onAddPhoto}
-      >Pick Image</button>
+        className="fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-200 flex items-center justify-center hover:scale-110 active:scale-95 z-50"
+        style={{ 
+          bottom: 'max(2rem, calc(2rem + env(safe-area-inset-bottom)))',
+          right: 'max(2rem, calc(2rem + env(safe-area-inset-right)))'
+        }}
+      >
+        <svg
+          className="w-8 h-8"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2.5}
+            d="M12 4v16m8-8H4"
+          />
+        </svg>
+      </button>
     </div>
   );
 };
@@ -209,8 +228,9 @@ const PhotoThumbnail = ({ photo, onClick }: PhotoThumbnailProps) => {
             alt={photo.annotation}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="absolute bottom-0 left-0 right-0 p-4">
+          {/* Always visible annotation overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
+            <div className="absolute bottom-0 left-0 right-0 p-3">
               <p className="text-white text-sm font-medium line-clamp-2 mb-1">
                 {photo.annotation}
               </p>
@@ -219,7 +239,7 @@ const PhotoThumbnail = ({ photo, onClick }: PhotoThumbnailProps) => {
               </p>
             </div>
           </div>
-          {/* Corner Badge */}
+          {/* Corner Badge - shows on hover */}
           <div className="absolute top-2 right-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
             View
           </div>
