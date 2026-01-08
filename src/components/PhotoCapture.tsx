@@ -16,14 +16,18 @@ export const PhotoCapture = ({ onPhotoSelected, onCancel }: PhotoCaptureProps) =
       setError(null);
 
       const photo = await Camera.getPhoto({
-        quality: 90,
+        quality: 80,
         allowEditing: false,
         resultType: CameraResultType.Base64,
         source: CameraSource.Camera,
+        saveToGallery: false,
+        correctOrientation: true,
       });
 
       if (photo.base64String) {
         onPhotoSelected(photo.base64String);
+      } else {
+        throw new Error('No image data received');
       }
     } catch (err: unknown) {
       console.error('Camera error:', err);
@@ -37,7 +41,7 @@ export const PhotoCapture = ({ onPhotoSelected, onCancel }: PhotoCaptureProps) =
           'Camera permission denied. Please enable camera access in Settings > Boat Photo Inspector > Camera.'
         );
       } else {
-        setError('Failed to capture photo. Please try again.');
+        setError(`Failed to capture photo: ${errorMessage}`);
       }
     } finally {
       setLoading(false);
@@ -50,14 +54,19 @@ export const PhotoCapture = ({ onPhotoSelected, onCancel }: PhotoCaptureProps) =
       setError(null);
 
       const photo = await Camera.getPhoto({
-        quality: 90,
+        quality: 80,
         allowEditing: false,
         resultType: CameraResultType.Base64,
         source: CameraSource.Photos,
+        // iOS-specific settings to help with conversion issues
+        saveToGallery: false,
+        correctOrientation: true,
       });
 
       if (photo.base64String) {
         onPhotoSelected(photo.base64String);
+      } else {
+        throw new Error('No image data received');
       }
     } catch (err: unknown) {
       console.error('Gallery error:', err);
@@ -70,8 +79,12 @@ export const PhotoCapture = ({ onPhotoSelected, onCancel }: PhotoCaptureProps) =
         setError(
           'Photo library permission denied. Please enable photo access in Settings > Boat Photo Inspector > Photos.'
         );
+      } else if (errorMessage.includes('Error loading image') || errorMessage.includes('conversion')) {
+        setError(
+          '⚠️ iOS Simulator photo library issue detected. Try:\n\n1. Take a photo with Camera instead\n2. Or test on a real device\n\n(Simulator sometimes has trouble loading gallery photos)'
+        );
       } else {
-        setError('Failed to select photo. Please try again.');
+        setError(`Failed to select photo: ${errorMessage}`);
       }
     } finally {
       setLoading(false);
